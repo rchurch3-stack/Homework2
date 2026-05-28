@@ -63,3 +63,29 @@ my_df$isLessThan <- my_df$post_bp < 120
 knitr::kable(my_df)
 ```
 
+### Task 3:
+
+```{r}
+placebo_patients <- paste("Subject", 1:10, sep = "_")
+placebo_pre_treatment <- c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130)
+placebo_post_treatment <- c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124)
+placebo_trial_df <- data.frame(placebo_patients, placebo_pre_treatment, placebo_post_treatment)
+
+my_list <- list(treatment = my_df, placebo = placebo_trial_df)
+my_list
+```
+
+##### Next, we access the first list element using 3 different kinds of syntax. Note that the single square brackets returns both the element (data frame) and the name, whereas, double square brackets returns just the data frame.
+
+```{r, eval=TRUE}
+my_list$treatment
+my_list[1]
+my_list[[1]]
+```
+
+Next, In one line, we access the placebo data frame, pre_bp column.
+
+```{r}
+my_list$placebo$placebo_pre_treatment
+```
+
