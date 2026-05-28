@@ -142,28 +142,57 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="quarto" class="level2">
-<h2 class="anchored" data-anchor-id="quarto">Quarto</h2>
-<p>Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <a href="https://quarto.org" class="uri">https://quarto.org</a>.</p>
+<section id="task-1" class="level2">
+<h2 class="anchored" data-anchor-id="task-1">Task 1:</h2>
+<p>Storing both the pre-treatment and post-treatment readings using the c() function in order to combine the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>preTreatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">130</span>, <span class="dv">128</span>, <span class="dv">116</span>, <span class="dv">124</span>, <span class="dv">133</span>, <span class="dv">134</span>, <span class="dv">118</span>, <span class="dv">126</span>, <span class="dv">114</span>, <span class="dv">127</span>, <span class="dv">141</span>, <span class="dv">138</span>, <span class="dv">128</span>, <span class="dv">140</span>, <span class="dv">137</span>, <span class="dv">131</span>, <span class="dv">120</span>, <span class="dv">128</span>, <span class="dv">139</span>, <span class="dv">135</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>postTreatment <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">114</span>, <span class="dv">98</span>, <span class="dv">113</span>, <span class="dv">99</span>, <span class="dv">107</span>, <span class="dv">116</span>, <span class="dv">113</span>, <span class="dv">111</span>, <span class="dv">119</span>, <span class="dv">117</span>, <span class="dv">101</span>, <span class="dv">119</span>, <span class="dv">130</span>, <span class="dv">122</span>, <span class="dv">106</span>, <span class="dv">106</span>, <span class="dv">124</span>, <span class="dv">102</span>, <span class="dv">117</span>, <span class="dv">113</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Next, we assign names to these vectors by using the paste() function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(preTreatment) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Subject"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(postTreatment) <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"Subject"</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">sep =</span> <span class="st">"_"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Now we calculate the difference in the measurements by simply subtracting post treatments by pre treatments, and then calculate the average in the blood pressure change.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>differenceInTreatments <span class="ot">&lt;-</span> postTreatment <span class="sc">-</span> preTreatment</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(differenceInTreatments)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Subject_1  Subject_2  Subject_3  Subject_4  Subject_5  Subject_6  Subject_7 
+       -16        -30         -3        -25        -26        -18         -5 
+ Subject_8  Subject_9 Subject_10 Subject_11 Subject_12 Subject_13 Subject_14 
+       -15          5        -10        -40        -19          2        -18 
+Subject_15 Subject_16 Subject_17 Subject_18 Subject_19 Subject_20 
+       -31        -25          4        -26        -22        -22 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="do">### Mean is shown next:</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(differenceInTreatments))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -17</code></pre>
+</div>
+</div>
+<p>The patients who experienced a decrease in blood pressure after treatment (a positive change) are shown below using the which() function.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>positiveChanges <span class="ot">&lt;-</span> <span class="fu">which</span>(differenceInTreatments <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="at">useNames =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(positiveChanges)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Subject_9 Subject_13 Subject_17 
+         9         13         17 </code></pre>
+</div>
+</div>
+<section id="average-of-those-where-the-blood-pressure-decreased." class="level3">
+<h3 class="anchored" data-anchor-id="average-of-those-where-the-blood-pressure-decreased.">Average of those where the blood pressure decreased.</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(positiveChanges))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 13</code></pre>
+</div>
+</div>
+
+
 </section>
-<section id="running-code" class="level2">
-<h2 class="anchored" data-anchor-id="running-code">Running Code</h2>
-<p>When you click the <strong>Render</strong> button a document will be generated that includes both content and the output of embedded code. You can embed code like this:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="sc">+</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 2</code></pre>
-</div>
-</div>
-<p>You can add options to executable code like this</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 4</code></pre>
-</div>
-</div>
-<p>The <code>echo: false</code> option disables the printing of code (only output is displayed).</p>
-
-
 </section>
 
 </main> <!-- /main -->

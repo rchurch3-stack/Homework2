@@ -5,23 +5,38 @@ format: html
 editor: visual
 ---
 
-## Quarto
+## Task 1:
 
-Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see <https://quarto.org>.
-
-## Running Code
-
-When you click the **Render** button a document will be generated that includes both content and the output of embedded code. You can embed code like this:
-
+Storing both the pre-treatment and post-treatment readings using the c() function in order to combine
+the data.
 ```{r}
-1 + 1
+preTreatment <- c(130, 128, 116, 124, 133, 134, 118, 126, 114, 127, 141, 138, 128, 140, 137, 131, 120, 128, 139, 135)
+
+postTreatment <- c(114, 98, 113, 99, 107, 116, 113, 111, 119, 117, 101, 119, 130, 122, 106, 106, 124, 102, 117, 113)
 ```
 
-You can add options to executable code like this
+Next, we assign names to these vectors by using the paste() function.
 
 ```{r}
-#| echo: false
-2 * 2
+names(preTreatment) <- paste("Subject", 1:20, sep = "_")
+names(postTreatment) <- paste("Subject", 1:20, sep = "_")
+```
+Now we calculate the difference in the measurements by simply subtracting post treatments by pre treatments, and then calculate the average in the blood pressure change.
+
+```{r, echo=TRUE}
+differenceInTreatments <- postTreatment - preTreatment
+print(differenceInTreatments)
+### Mean is shown next:
+print(mean(differenceInTreatments))
+```
+The patients who experienced a decrease in blood pressure after treatment (a positive change) are shown below using the which() function.
+```{r}
+positiveChanges <- which(differenceInTreatments > 0, useNames = TRUE)
+print(positiveChanges)
 ```
 
-The `echo: false` option disables the printing of code (only output is displayed).
+### Average of those where the blood pressure decreased.
+```{r}
+print(mean(positiveChanges))
+```
+

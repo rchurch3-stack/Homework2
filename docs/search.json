@@ -4,20 +4,13 @@
     "href": "Homework2.html",
     "title": "Homework2",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+    "text": "Storing both the pre-treatment and post-treatment readings using the c() function in order to combine the data.\n\npreTreatment &lt;- c(130, 128, 116, 124, 133, 134, 118, 126, 114, 127, 141, 138, 128, 140, 137, 131, 120, 128, 139, 135)\n\npostTreatment &lt;- c(114, 98, 113, 99, 107, 116, 113, 111, 119, 117, 101, 119, 130, 122, 106, 106, 124, 102, 117, 113)\n\nNext, we assign names to these vectors by using the paste() function.\n\nnames(preTreatment) &lt;- paste(\"Subject\", 1:20, sep = \"_\")\nnames(postTreatment) &lt;- paste(\"Subject\", 1:20, sep = \"_\")\n\nNow we calculate the difference in the measurements by simply subtracting post treatments by pre treatments, and then calculate the average in the blood pressure change.\n\ndifferenceInTreatments &lt;- postTreatment - preTreatment\nprint(differenceInTreatments)\n\n Subject_1  Subject_2  Subject_3  Subject_4  Subject_5  Subject_6  Subject_7 \n       -16        -30         -3        -25        -26        -18         -5 \n Subject_8  Subject_9 Subject_10 Subject_11 Subject_12 Subject_13 Subject_14 \n       -15          5        -10        -40        -19          2        -18 \nSubject_15 Subject_16 Subject_17 Subject_18 Subject_19 Subject_20 \n       -31        -25          4        -26        -22        -22 \n\n### Mean is shown next:\nprint(mean(differenceInTreatments))\n\n[1] -17\n\n\nThe patients who experienced a decrease in blood pressure after treatment (a positive change) are shown below using the which() function.\n\npositiveChanges &lt;- which(differenceInTreatments &gt; 0, useNames = TRUE)\nprint(positiveChanges)\n\n Subject_9 Subject_13 Subject_17 \n         9         13         17 \n\n\n\n\n\nprint(mean(positiveChanges))\n\n[1] 13"
   },
   {
-    "objectID": "Homework2.html#quarto",
-    "href": "Homework2.html#quarto",
+    "objectID": "Homework2.html#task-1",
+    "href": "Homework2.html#task-1",
     "title": "Homework2",
     "section": "",
-    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
-  },
-  {
-    "objectID": "Homework2.html#running-code",
-    "href": "Homework2.html#running-code",
-    "title": "Homework2",
-    "section": "Running Code",
-    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+    "text": "Storing both the pre-treatment and post-treatment readings using the c() function in order to combine the data.\n\npreTreatment &lt;- c(130, 128, 116, 124, 133, 134, 118, 126, 114, 127, 141, 138, 128, 140, 137, 131, 120, 128, 139, 135)\n\npostTreatment &lt;- c(114, 98, 113, 99, 107, 116, 113, 111, 119, 117, 101, 119, 130, 122, 106, 106, 124, 102, 117, 113)\n\nNext, we assign names to these vectors by using the paste() function.\n\nnames(preTreatment) &lt;- paste(\"Subject\", 1:20, sep = \"_\")\nnames(postTreatment) &lt;- paste(\"Subject\", 1:20, sep = \"_\")\n\nNow we calculate the difference in the measurements by simply subtracting post treatments by pre treatments, and then calculate the average in the blood pressure change.\n\ndifferenceInTreatments &lt;- postTreatment - preTreatment\nprint(differenceInTreatments)\n\n Subject_1  Subject_2  Subject_3  Subject_4  Subject_5  Subject_6  Subject_7 \n       -16        -30         -3        -25        -26        -18         -5 \n Subject_8  Subject_9 Subject_10 Subject_11 Subject_12 Subject_13 Subject_14 \n       -15          5        -10        -40        -19          2        -18 \nSubject_15 Subject_16 Subject_17 Subject_18 Subject_19 Subject_20 \n       -31        -25          4        -26        -22        -22 \n\n### Mean is shown next:\nprint(mean(differenceInTreatments))\n\n[1] -17\n\n\nThe patients who experienced a decrease in blood pressure after treatment (a positive change) are shown below using the which() function.\n\npositiveChanges &lt;- which(differenceInTreatments &gt; 0, useNames = TRUE)\nprint(positiveChanges)\n\n Subject_9 Subject_13 Subject_17 \n         9         13         17 \n\n\n\n\n\nprint(mean(positiveChanges))\n\n[1] 13"
   }
 ]
