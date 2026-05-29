@@ -538,16 +538,138 @@ $placebo
 20 Subject_20    135     113     -22       TRUE</code></pre>
 </div>
 </div>
-<p>Next, In one line, access the placebo data frame, pre_bp column.</p>
+<p>Next, In one line, we access the placebo data frame, pre_bp column.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>placebo<span class="sc">$</span>placebo_pre_treatment</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> [1] 138 135 147 117 152 134 114 121 131 130</code></pre>
 </div>
 </div>
-
-
 </section>
+</section>
+<section id="task-4" class="level3">
+<h3 class="anchored" data-anchor-id="task-4">Task 4:</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>treatment<span class="sc">$</span>status <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">20</span>)</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>my_list<span class="sc">$</span>placebo<span class="sc">$</span>status <span class="ot">&lt;-</span> <span class="fu">character</span>(<span class="dv">10</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>my_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$treatment
+     patients pre_bp post_bp diff_bp isLessThan status
+1   Subject_1    130     114     -16       TRUE       
+2   Subject_2    128      98     -30       TRUE       
+3   Subject_3    116     113      -3       TRUE       
+4   Subject_4    124      99     -25       TRUE       
+5   Subject_5    133     107     -26       TRUE       
+6   Subject_6    134     116     -18       TRUE       
+7   Subject_7    118     113      -5       TRUE       
+8   Subject_8    126     111     -15       TRUE       
+9   Subject_9    114     119       5       TRUE       
+10 Subject_10    127     117     -10       TRUE       
+11 Subject_11    141     101     -40       TRUE       
+12 Subject_12    138     119     -19       TRUE       
+13 Subject_13    128     130       2      FALSE       
+14 Subject_14    140     122     -18      FALSE       
+15 Subject_15    137     106     -31       TRUE       
+16 Subject_16    131     106     -25       TRUE       
+17 Subject_17    120     124       4      FALSE       
+18 Subject_18    128     102     -26       TRUE       
+19 Subject_19    139     117     -22       TRUE       
+20 Subject_20    135     113     -22       TRUE       
+
+$placebo
+   placebo_patients placebo_pre_treatment placebo_post_treatment status
+1         Subject_1                   138                    105       
+2         Subject_2                   135                    136       
+3         Subject_3                   147                    123       
+4         Subject_4                   117                    130       
+5         Subject_5                   152                    134       
+6         Subject_6                   134                    143       
+7         Subject_7                   114                    135       
+8         Subject_8                   121                    139       
+9         Subject_9                   131                    120       
+10       Subject_10                   130                    124       </code></pre>
+</div>
+</div>
+<p>Next, we assign statuses to each of the rows in the two data frames using control loops and if-else statements</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(index <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>) {</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  bp <span class="ot">&lt;-</span> my_list<span class="sc">$</span>treatment<span class="sc">$</span>post_bp[index]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&lt;=</span> <span class="dv">120</span>) {</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>treatment<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"optimal"</span></span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">&amp;</span> bp <span class="sc">&lt;=</span> <span class="dv">130</span>) {</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>treatment<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"borderline"</span></span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&gt;</span> <span class="dv">130</span>) {</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>treatment<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"high"</span></span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     patients pre_bp post_bp diff_bp isLessThan     status
+1   Subject_1    130     114     -16       TRUE    optimal
+2   Subject_2    128      98     -30       TRUE    optimal
+3   Subject_3    116     113      -3       TRUE    optimal
+4   Subject_4    124      99     -25       TRUE    optimal
+5   Subject_5    133     107     -26       TRUE    optimal
+6   Subject_6    134     116     -18       TRUE    optimal
+7   Subject_7    118     113      -5       TRUE    optimal
+8   Subject_8    126     111     -15       TRUE    optimal
+9   Subject_9    114     119       5       TRUE    optimal
+10 Subject_10    127     117     -10       TRUE    optimal
+11 Subject_11    141     101     -40       TRUE    optimal
+12 Subject_12    138     119     -19       TRUE    optimal
+13 Subject_13    128     130       2      FALSE borderline
+14 Subject_14    140     122     -18      FALSE borderline
+15 Subject_15    137     106     -31       TRUE    optimal
+16 Subject_16    131     106     -25       TRUE    optimal
+17 Subject_17    120     124       4      FALSE borderline
+18 Subject_18    128     102     -26       TRUE    optimal
+19 Subject_19    139     117     -22       TRUE    optimal
+20 Subject_20    135     113     -22       TRUE    optimal</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(index <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  bp <span class="ot">&lt;-</span> my_list<span class="sc">$</span>placebo<span class="sc">$</span>placebo_post_treatment[index]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&lt;=</span> <span class="dv">120</span>) {</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>placebo<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"optimal"</span></span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&gt;</span> <span class="dv">120</span> <span class="sc">&amp;</span> bp <span class="sc">&lt;=</span> <span class="dv">130</span>) {</span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>placebo<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"borderline"</span></span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(bp <span class="sc">&gt;</span> <span class="dv">130</span>) {</span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>    my_list<span class="sc">$</span>placebo<span class="sc">$</span>status[index] <span class="ot">&lt;-</span> <span class="st">"high"</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb31-17"><a href="#cb31-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-18"><a href="#cb31-18" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(my_list<span class="sc">$</span>placebo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   placebo_patients placebo_pre_treatment placebo_post_treatment     status
+1         Subject_1                   138                    105    optimal
+2         Subject_2                   135                    136       high
+3         Subject_3                   147                    123 borderline
+4         Subject_4                   117                    130 borderline
+5         Subject_5                   152                    134       high
+6         Subject_6                   134                    143       high
+7         Subject_7                   114                    135       high
+8         Subject_8                   121                    139       high
+9         Subject_9                   131                    120    optimal
+10       Subject_10                   130                    124 borderline</code></pre>
+</div>
+</div>
+
+
 </section>
 </section>
 

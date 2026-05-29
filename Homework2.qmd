@@ -89,3 +89,56 @@ Next, In one line, we access the placebo data frame, pre_bp column.
 my_list$placebo$placebo_pre_treatment
 ```
 
+
+### Task 4:
+
+```{r}
+my_list$treatment$status <- character(20)
+my_list$placebo$status <- character(10)
+my_list
+```
+
+Next, we assign statuses to each of the rows in the two data frames using control loops and if-else statements
+
+```{r}
+for(index in 1:20) {
+
+  bp <- my_list$treatment$post_bp[index]
+
+  if(bp <= 120) {
+    my_list$treatment$status[index] <- "optimal"
+  }
+
+  if(bp > 120 & bp <= 130) {
+    my_list$treatment$status[index] <- "borderline"
+  }
+
+  if(bp > 130) {
+    my_list$treatment$status[index] <- "high"
+  }
+}
+
+print(my_list$treatment)
+```
+
+```{r}
+for(index in 1:10) {
+
+  bp <- my_list$placebo$placebo_post_treatment[index]
+
+  if(bp <= 120) {
+    my_list$placebo$status[index] <- "optimal"
+  }
+
+  if(bp > 120 & bp <= 130) {
+    my_list$placebo$status[index] <- "borderline"
+  }
+
+  if(bp > 130) {
+    my_list$placebo$status[index] <- "high"
+  }
+}
+
+print(my_list$placebo)
+```
+
