@@ -167,7 +167,7 @@ names(stats) <- c(
   knitr::kable(stats)
 }
 
-summary_stats(my_list, "mean")
+summary_stats(my_list)
 summary_stats(my_list, "var")
 summary_stats(my_list, "sd")
 summary_stats(my_list, "min")
