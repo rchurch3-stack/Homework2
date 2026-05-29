@@ -45,22 +45,22 @@ print(mean(positiveChanges))
 ### Create a new data frame by assigning each of two columns the vectors post and pre treatment blood pressure readings.
 
 ```{r}
-my_df <- data.frame(patients, pre_bp, post_bp, diff_bp)
-my_df
+treatment_df <- data.frame(patients, pre_bp, post_bp, diff_bp)
+treatment_df
 ```
 
 
 ### Returning only those rows of diff_bp where diff column is negative.
 
 ```{r}
-subset(my_df, diff_bp < 0)
+subset(treatment_df, diff_bp < 0)
 ```
 
 ### storing TRUE in a new column on the data frame if post_bp is less than 120.
 
 ```{r}
-my_df$isLessThan <- my_df$post_bp < 120
-knitr::kable(my_df)
+treatment_df$isLessThan <- treatment_df$post_bp < 120
+knitr::kable(treatment_df)
 ```
 
 ### Task 3:
@@ -69,9 +69,10 @@ knitr::kable(my_df)
 placebo_patients <- paste("Subject", 1:10, sep = "_")
 placebo_pre_treatment <- c(138, 135, 147, 117, 152, 134, 114, 121, 131, 130)
 placebo_post_treatment <- c(105, 136, 123, 130, 134, 143, 135, 139, 120, 124)
-placebo_trial_df <- data.frame(placebo_patients, placebo_pre_treatment, placebo_post_treatment)
+placebo_diff <- placebo_post_treatment - placebo_pre_treatment
+placebo_trial_df <- data.frame(placebo_patients, placebo_pre_treatment, placebo_post_treatment, placebo_diff)
 
-my_list <- list(treatment = my_df, placebo = placebo_trial_df)
+my_list <- list(treatment = treatment_df, placebo = placebo_trial_df)
 my_list
 ```
 
@@ -140,5 +141,36 @@ for(index in 1:10) {
 }
 
 print(my_list$placebo)
+```
+
+# Task 5:
+
+#### Here we build a function capable of accepting both the list containing both the treatment and placebo data frames and an optional argument that takes a string, which will be used to choose the statistic of interest, i.e., mean (default), variance, standard deviation, min, and max.
+
+#### Also, note how the names given to the list elements are built dynamically using the **names()** function.
+
+```{r}
+summary_stats <- function(bp_trials_list, stat = "mean") {
+  my_fun <- get(stat)
+
+  stats <- c(my_fun(bp_trials_list$treatment$pre_bp), my_fun(bp_trials_list$treatment$post_bp), my_fun(bp_trials_list$treatment$diff_bp), my_fun(bp_trials_list$placebo$placebo_pre_treatment), my_fun(bp_trials_list$placebo$placebo_post_treatment), my_fun(bp_trials_list$placebo$placebo_diff))
+  
+names(stats) <- c(
+  paste0(stat, "_treatment_pre"),
+  paste0(stat, "_treatment_post"),
+  paste0(stat, "_treatment_diff"),
+  paste0(stat, "_placebo_pre"),
+  paste0(stat, "_placebo_post"),
+  paste0(stat, "_placebo_diff")
+)
+  
+  knitr::kable(stats)
+}
+
+summary_stats(my_list, "mean")
+summary_stats(my_list, "var")
+summary_stats(my_list, "sd")
+summary_stats(my_list, "min")
+summary_stats(my_list, "max")
 ```
 
